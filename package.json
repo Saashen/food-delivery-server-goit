@@ -1,0 +1,24 @@
+{
+  "name": "food-delivery-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "debug": "node --inspect index.js"
+  },
+  "author": "Saashen",
+  "license": "ISC",
+  "dependencies": {
+    "morgan": "^1.9.1",
+    "nodemon": "^2.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saashen/food-delivery-server-goit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Saashen/food-delivery-server-goit/issues"
+  },
+  "homepage": "https://github.com/Saashen/food-delivery-server-goit#readme"
+}
