@@ -1,0 +1,86 @@
+[
+  {
+    "id": 19112831,
+    "sku": 1120001,
+    "name": "Пицца Пепперони с томатами",
+    "description": "Бергадер Блю, Моцарелла, Пепперони, Соус Альфредо",
+    "price": "100",
+    "currency": "UAN",
+    "creatorId": 1,
+    "created": "21-03-2020",
+    "modified": "21-03-2020",
+    "categories": ["pizza"]
+  },
+  {
+    "id": 19112832,
+    "sku": 1120002,
+    "name": "Пицца Маргарита",
+    "description": "Моцарелла, Соус Классический",
+    "price": "80",
+    "currency": "UAN",
+    "creatorId": 1,
+    "created": "21-03-2020",
+    "modified": "21-03-2020",
+    "categories": ["pizza"]
+  },
+  {
+    "id": 19112833,
+    "sku": 1120003,
+    "name": "Пицца Техас",
+    "description": "Кукуруза, Лук, Грибы, Колбаски баварские, Моцарелла, Соус Барбекю",
+    "price": "90",
+    "currency": "UAN",
+    "creatorId": 1,
+    "created": "21-03-2020",
+    "modified": "21-03-2020",
+    "categories": ["pizza"]
+  },
+  {
+    "id": 19112834,
+    "sku": 1120004,
+    "name": "Пицца Барбекю",
+    "description": "Курица, Лук, Бекон, Грибы, Моцарелла, Соус Барбекю",
+    "price": "110",
+    "currency": "UAN",
+    "creatorId": 1,
+    "created": "21-03-2020",
+    "modified": "21-03-2020",
+    "categories": ["pizza"]
+  },
+  {
+    "id": 19112835,
+    "sku": 1120005,
+    "name": "Пицца Спайси",
+    "description": "Халапеньо, Бекон, Моцарелла, Пепперони, Помидоры, Соус Классический",
+    "price": "160",
+    "currency": "UAN",
+    "creatorId": 1,
+    "created": "21-03-2020",
+    "modified": "21-03-2020",
+    "categories": ["pizza"]
+  },
+  {
+    "id": 19112836,
+    "sku": 1120006,
+    "name": "Пицца Овощная Феерия",
+    "description": "Зеленый перец, Оливки, Лук, Грибы, Моцарелла, Помидоры, Соус Классический",
+    "price": "140",
+    "currency": "UAN",
+    "creatorId": 1,
+    "created": "21-03-2020",
+    "modified": "21-03-2020",
+    "categories": ["pizza"]
+  },
+  {
+    "id": 19112837,
+    "sku": 1120007,
+    "name": "Пицца ПапараZZи",
+    "description": "Оливки, Моцарелла, Пепперони, Помидоры, Соус Альфредо",
+    "price": "150",
+    "currency": "UAN",
+    "creatorId": 1,
+    "created": "21-03-2020",
+    "modified": "21-03-2020",
+    "categories": ["pizza"]
+  }
+]
