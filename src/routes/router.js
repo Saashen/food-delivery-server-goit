@@ -1,31 +1,33 @@
 const express = require('express');
+const apiRoutes = express.Router();
+
 const mainRoute = require('./main/main');
-const productsRoute = require('./products/products');
+const getProducts = require('./products/products');
+const getProduct = require('./products/product');
 const getSaveImageHandlers = require('./image/saveImage');
 const createUser = require('./user/createUser');
 const getUser = require('./user/getUser');
 
-const apiRoutes = express.Router();
+const middleware = (req, resp, next) => {
+  console.log(req);
+  if (req.body.userName) {
+    next();
+    return;
+  }
 
-// const middleware = (req, resp, next) => {
-//   console.log(req);
-//   if (req.body.userName) {
-//     next();
-//     return;
-//   }
-
-//   resp.status(400);
-//   resp.json({
-//     error: 'user has no "userName" field',
-//   });
-// };
+  resp.status(400);
+  resp.json({
+    error: 'user has no "userName" field',
+  });
+};
 
 apiRoutes
   .get('/', mainRoute)
-  .get('/users/:userId', getUser)
-  .get('/products', productsRoute)
+  .get('/products', getProducts)
+  .get('/products/:id', getProduct)
+  // .get('/users/:userId', getUser)
 
-  .post('/users', createUser)
+  .post('/users', middleware, createUser)
   .post('/image', getSaveImageHandlers())
   .get('*', (req, res, next) => {
     res.status(404).send('Route not exists');
