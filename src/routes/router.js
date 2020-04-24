@@ -9,7 +9,6 @@ const createUser = require('./user/createUser');
 const getUser = require('./user/getUser');
 
 const middleware = (req, resp, next) => {
-  console.log(req);
   if (req.body.userName) {
     next();
     return;

@@ -2,24 +2,28 @@ const fs = require('fs');
 const path = require('path');
 const util = require('util');
 
-const usersFolder = path.resolve(__dirname, '../../../', 'data/users');
-
 const writeFile = util.promisify(fs.writeFile);
 
-const saveNewUser = (fileName, data) => {
-  const src = path.resolve(usersFolder, fileName + '.json');
-  const dataStr = JSON.stringify(data);
+const saveNewUser = user => {
+  const filePath = path.join(__dirname, '../../', 'db', 'all-users.json');
+  const checkFilePath = fs.existsSync(filePath);
 
-  return writeFile(src, dataStr);
+  if (checkFilePath) {
+    let readedData = require(filePath);
+    readedData.push(user);
+
+    return writeFile(filePath, JSON.stringify(readedData))
+  }
+
+  let arr = [];
+  arr.push(user);
+
+  return writeFile(filePath, JSON.stringify(arr));
 };
 
 const createUser = (request, response) => {
   const user = request.body;
-  console.log(user);
-
   const userData = { ...user, id: Math.random() };
-
-  const fileName = userData.userName.toLowerCase() + userData.id;
 
   const sendResponse = () => {
     response.json({
@@ -35,9 +39,7 @@ const createUser = (request, response) => {
     });
   };
 
-  saveNewUser(fileName, userData)
-    .then(sendResponse)
-    .catch(sendError);
+  saveNewUser(userData).then(sendResponse).catch(sendError);
 };
 
 module.exports = createUser;
