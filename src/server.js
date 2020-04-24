@@ -1,25 +1,28 @@
-const http = require('http');
-const url = require('url');
-
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const app = require('./modules/app');
 const morgan = require('morgan');
 const router = require('./routes/router');
 
-const logger = morgan('combined');
+const errorHandler = (err, req, res, next) => {
+  res.status(500).send('Error found: ' + err.stack);
+};
+
+const staticPath = path.join(__dirname, '..', 'assets');
 
 const startServer = port => {
-  const server = http.createServer((request, response) => {
-    const parsedUrl = url.parse(request.url);
-    const func = router[parsedUrl.pathname] || router.default;
+  app
+    .use(bodyParser.urlencoded({ extended: false }))
+    .use(bodyParser.json())
+    .use(morgan('dev'))
+    .use(express.static(staticPath))
+    .use('/', router)
+    .use(errorHandler);
 
-    logger(request, response, () => func(request, response));
-  });
+  app.listen(port);
 
-  server.listen(port, err => {
-    if (err) {
-      return console.log('something bad happened', err);
-    }
-    console.log(`server is listening ${port}`);
-  });
+  console.log('Server was started at http://localhost:' + port);
 };
 
 module.exports = startServer;
