@@ -30,12 +30,7 @@ const getProduct = (request, response) => {
   };
 
   const product = getProductFromDb(id);
-
-  if (product) {
-    return sendResponse(product);
-  } else {
-    return sendError();
-  }
+  return product ? sendResponse(product) : sendError();
 };
 
 module.exports = getProduct;

@@ -1,16 +1,34 @@
-const getUserFromDb = id => {
-  const src = path.resolve(usersFolder, fileName + '.json');
+const path = require('path');
 
-  return readFileSync(src);
+const filePath = path.join(__dirname, '../../', 'db', 'all-users.json');
+const usersData = require(filePath);
+
+const getUserFromDb = id => {
+  const userWithId = usersData.find(user => user.id === id);
+  return JSON.stringify(userWithId);
 };
 
 const getUser = (request, response) => {
-  const id = request.params.userId;
+  const id = Number(request.params.userId);
 
-  response.set('Content-Type', 'application/json');
+  const sendResponse = user => {
+    response.status(200);
+    response.set('Content-Type', 'application/json');
+    response.json({
+      user,
+    });
+  };
 
-  response.status(200);
-  response.json({ user: getUserFromDb(id) });
+  const sendError = () => {
+    response.set('Content-Type', 'application/json');
+    response.status(400);
+    response.json({
+      status: 'not found',
+    });
+  };
+
+  const user = getUserFromDb(id);
+  return user ? sendResponse(user) : sendError();
 };
 
 module.exports = getUser;

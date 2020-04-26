@@ -2,8 +2,8 @@ const express = require('express');
 const apiRoutes = express.Router();
 
 const mainRoute = require('./main/main');
-const getProducts = require('./products/products');
-const getProduct = require('./products/product');
+const getProducts = require('./products/getProducts');
+const getProduct = require('./products/getProduct');
 const getSaveImageHandlers = require('./image/saveImage');
 const createUser = require('./user/createUser');
 const getUser = require('./user/getUser');
@@ -24,12 +24,12 @@ apiRoutes
   .get('/', mainRoute)
   .get('/products', getProducts)
   .get('/products/:id', getProduct)
-  // .get('/users/:userId', getUser)
+  .get('/users/:userId', getUser)
 
   .post('/users', middleware, createUser)
   .post('/image', getSaveImageHandlers())
   .get('*', (req, res, next) => {
-    res.status(404).send('Route not exists');
+    res.status(404).send('Route does not exist');
   });
 
 module.exports = apiRoutes;

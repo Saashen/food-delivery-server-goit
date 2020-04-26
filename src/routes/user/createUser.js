@@ -4,6 +4,10 @@ const util = require('util');
 
 const writeFile = util.promisify(fs.writeFile);
 
+function getRandomInteger() {
+  return Math.floor(Math.random() * (10000000000000000 - 1) ) + 1;
+}
+
 const saveNewUser = user => {
   const filePath = path.join(__dirname, '../../', 'db', 'all-users.json');
   const checkFilePath = fs.existsSync(filePath);
@@ -23,7 +27,7 @@ const saveNewUser = user => {
 
 const createUser = (request, response) => {
   const user = request.body;
-  const userData = { ...user, id: Math.random() };
+  const userData = { ...user, id: getRandomInteger() };
 
   const sendResponse = () => {
     response.json({
