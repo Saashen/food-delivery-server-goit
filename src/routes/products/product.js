@@ -1,25 +1,21 @@
 const path = require('path');
-var fs = require('fs');
 
-const getProductFromDb = id => {
-  const filePath = path.join(__dirname, '../../', 'db', 'all-products.json');
+const filePath = path.join(__dirname, '../../', 'db', 'all-products.json');
+const productsData = require(filePath);
 
-  return fs.readFile(filePath, 'utf8', function (err, data) {
-    if (err) throw err;
-    const readedFile = JSON.parse(data);
-    const productWithId = readedFile.find(product => product.id === id);
-
-    return JSON.stringify(productWithId);
-  });
-};
+function getProductFromDb(id) {
+  const productWithId = productsData.find(product => product.id === id);
+  return JSON.stringify(productWithId);
+}
 
 const getProduct = (request, response) => {
-  const id = request.params.id;
+  const id = Number(request.params.id);
 
   const sendResponse = product => {
     response.status(200);
     response.set('Content-Type', 'application/json');
     response.json({
+      status: 'success',
       product,
     });
   };
@@ -28,13 +24,18 @@ const getProduct = (request, response) => {
     response.set('Content-Type', 'application/json');
     response.status(400);
     response.json({
-      error: 'user was not saved',
+      status: 'no products',
+      products: [],
     });
   };
 
-  getProductFromDb(id)
-    .then(data => sendResponse(data))
-    .catch(sendError);
+  const product = getProductFromDb(id);
+
+  if (product) {
+    return sendResponse(product);
+  } else {
+    return sendError();
+  }
 };
 
 module.exports = getProduct;
