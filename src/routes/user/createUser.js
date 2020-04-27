@@ -5,7 +5,7 @@ const util = require('util');
 const writeFile = util.promisify(fs.writeFile);
 
 function getRandomInteger() {
-  return Math.floor(Math.random() * (10000000000000000 - 1) ) + 1;
+  return Math.floor(Math.random() * (10000000000000000 - 1)) + 1;
 }
 
 const saveNewUser = user => {
@@ -16,7 +16,7 @@ const saveNewUser = user => {
     let readedData = require(filePath);
     readedData.push(user);
 
-    return writeFile(filePath, JSON.stringify(readedData))
+    return writeFile(filePath, JSON.stringify(readedData));
   }
 
   let arr = [];

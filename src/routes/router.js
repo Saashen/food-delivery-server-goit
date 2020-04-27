@@ -28,7 +28,7 @@ apiRoutes
   .get('/users/:userId', getUser)
 
   .post('/users', middleware, createUser)
-  .post('./orders', makeOrder)
+  .post('/orders', makeOrder)
     // .post('/image', getSaveImageHandlers())
   .get('*', (req, res, next) => {
     res.status(404).send('Route does not exist');

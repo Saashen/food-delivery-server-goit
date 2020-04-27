@@ -13,8 +13,8 @@ const getProducts = (request, response) => {
   }
 
   const products = [];
-
   const arrOfIds = request.query.ids.split(',').map(id => Number(id));
+  
   arrOfIds.forEach(id =>
     productsData.find(product => {
       return product.id === id && products.push(product);
