@@ -4,9 +4,10 @@ const apiRoutes = express.Router();
 const mainRoute = require('./main/main');
 const getProducts = require('./products/getProducts');
 const getProduct = require('./products/getProduct');
-const getSaveImageHandlers = require('./image/saveImage');
 const createUser = require('./user/createUser');
 const getUser = require('./user/getUser');
+const makeOrder = require('./orders/makeOrder');
+// const getSaveImageHandlers = require('./image/saveImage');
 
 const middleware = (req, resp, next) => {
   if (req.body.userName) {
@@ -27,7 +28,8 @@ apiRoutes
   .get('/users/:userId', getUser)
 
   .post('/users', middleware, createUser)
-  .post('/image', getSaveImageHandlers())
+  .post('./orders', makeOrder)
+    // .post('/image', getSaveImageHandlers())
   .get('*', (req, res, next) => {
     res.status(404).send('Route does not exist');
   });
